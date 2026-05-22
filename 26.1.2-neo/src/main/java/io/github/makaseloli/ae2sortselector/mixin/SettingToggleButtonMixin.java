@@ -3,8 +3,6 @@ package io.github.makaseloli.ae2sortselector.mixin;
 import java.util.ArrayList;
 import java.util.List;
 
-import appeng.api.config.Setting;
-import appeng.api.config.Settings;
 import appeng.client.gui.widgets.SettingToggleButton;
 import io.github.makaseloli.ae2sortselector.bridge.SortSelectorMenuBridge;
 import net.minecraft.client.input.InputWithModifiers;
@@ -19,9 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SettingToggleButton.class)
 public abstract class SettingToggleButtonMixin<T extends Enum<T>> implements SortSelectorMenuBridge {
-    @Shadow(remap = false)
-    public abstract Setting<T> getSetting();
-
     @Shadow(remap = false)
     public abstract T getCurrentValue();
 
@@ -66,12 +61,22 @@ public abstract class SettingToggleButtonMixin<T extends Enum<T>> implements Sor
 
     @Override
     public List<? extends Enum<?>> ae2sortselector$getValues() {
-        if (this.getSetting() != Settings.SORT_BY) {
+        T current = this.ae2sortselector$getCurrentSettingValue();
+        if (current == null) {
             return List.of();
         }
-        List<T> values = new ArrayList<>(List.of(this.getCurrentValue().getDeclaringClass().getEnumConstants()));
+        T[] constants = current.getDeclaringClass().getEnumConstants();
+        if (constants == null || constants.length <= 1) {
+            return List.of();
+        }
+        List<T> values = new ArrayList<>(List.of(constants));
         values.sort(Enum::compareTo);
         return values;
+    }
+
+    @Unique
+    private T ae2sortselector$getCurrentSettingValue() {
+        return this.ae2sortselector$savedCurrentValue != null ? this.ae2sortselector$savedCurrentValue : this.currentValue;
     }
 
     @Override
@@ -117,7 +122,7 @@ public abstract class SettingToggleButtonMixin<T extends Enum<T>> implements Sor
 
     @Override
     public Enum<?> ae2sortselector$getCurrentValue() {
-        return this.ae2sortselector$savedCurrentValue != null ? this.ae2sortselector$savedCurrentValue : this.currentValue;
+        return this.ae2sortselector$getCurrentSettingValue();
     }
 
     @Inject(method = "getNextValue", remap = false, at = @At("HEAD"), cancellable = true)

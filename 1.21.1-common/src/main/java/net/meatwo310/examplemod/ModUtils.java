@@ -1,4 +1,4 @@
-package net.meatwo310.examplemod;
+package io.github.makaseloli.ae2sortselector;
 
 import net.minecraft.resources.ResourceLocation;
 

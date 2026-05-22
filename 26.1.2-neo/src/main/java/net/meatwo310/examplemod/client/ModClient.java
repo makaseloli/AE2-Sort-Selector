@@ -1,7 +1,7 @@
-package net.meatwo310.examplemod.client;
+package io.github.makaseloli.ae2sortselector.client;
 
-import net.meatwo310.examplemod.Constants;
-import net.meatwo310.examplemod.client.mdk.config.KeyedConfigScreen;
+import io.github.makaseloli.ae2sortselector.Constants;
+import io.github.makaseloli.ae2sortselector.client.mdk.config.KeyedConfigScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;

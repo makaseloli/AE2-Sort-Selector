@@ -1,4 +1,4 @@
-package net.meatwo310.examplemod.client;
+package io.github.makaseloli.ae2sortselector.client;
 
 import net.fabricmc.api.ClientModInitializer;
 

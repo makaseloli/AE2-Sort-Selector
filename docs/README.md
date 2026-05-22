@@ -35,7 +35,7 @@ Only the subprojects included in `settings.gradle.kts` are configured. Remove un
 1. Click **Use this template** on GitHub to create your repository from this template.
 2. Edit `settings.gradle.kts` and remove unused subprojects to reduce Gradle configuration time and cache usage.
 3. Edit `gradle.properties` for your mod id, name, version, group, license, authors, URLs, and Fabric entry points.
-4. Update Java package names, `Constants`, entry points, mixin config names, and language assets from `examplemod` to your mod id.
+4. Update Java package names, `Constants`, entry points, mixin config names, and language assets from `ae2sortselector` to your mod id.
 5. Create a root `README.md` and `LICENSE` for your mod. Keep `docs/*.md` unchanged if you want future template updates to merge cleanly.
 
 ## Requirements
@@ -109,7 +109,7 @@ public final class ModConfigs {
     public static final ConfigDeclaration SERVER =
             ConfigDeclaration.of(ConfigSide.SERVER, ServerConfig.ENTRIES);
     public static final ConfigDeclaration CLIENT =
-            ConfigDeclaration.of(ConfigSide.CLIENT, ClientConfig.ENTRIES, "examplemod-client-special.toml");
+            ConfigDeclaration.of(ConfigSide.CLIENT, ClientConfig.ENTRIES, "ae2sortselector-client-special.toml");
 
     public static final List<ConfigDeclaration> ALL = List.of(SERVER, CLIENT);
 
